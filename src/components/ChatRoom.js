@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
+import { useParams } from 'react-router-dom';
 
 const socket = io.connect('http://localhost:5000');
 
-const ChatRoom = ({ roomName, username }) => {
+const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const { roomName } = useParams();
+
+  const username = 'test'
 
   useEffect(() => {
     socket.emit('join', { room: roomName, username });
@@ -19,6 +23,10 @@ const ChatRoom = ({ roomName, username }) => {
       setMessages([...messages, message]);
     });
   }, [messages]);
+
+  useEffect(() => {
+    console.log(roomName)
+  }, [])
 
   const handleSubmit = e => {
     e.preventDefault();
