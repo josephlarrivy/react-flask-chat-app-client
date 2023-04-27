@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from 'axios'
 
@@ -10,16 +10,29 @@ const Home = () => {
   const [localStoreUsername, localRemoveUsername, localRetrieveUsername] = useLocalStorage()
   const navigate = useNavigate()
   const [inputValue, setInputValue] = useState('');
+  const [createOrJoin, setCreateOrJoin] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null)
+
+  useEffect(() => {
+    const user = localRetrieveUsername()
+    if (user !== null) {
+      setCurrentUser(user)
+    } else {
+      setCurrentUser(null)
+    }
+  }, [])
 
   const handleCreateChat = (e) => {
     e.preventDefault();
     console.log(inputValue);
     axios.post('http://localhost:5002/createChat', {
-      "chatname" : inputValue
+      "chatname" : inputValue,
+      "owner" : currentUser
     })
       .then(response => {
         if (response.data.success) {
-          // navigate('/');
+          const chatName = inputValue
+          navigate(`/chat/${chatName}`)
         } else {
           console.log(response.data.message);
         }
@@ -27,7 +40,26 @@ const Home = () => {
       .catch(error => {
         console.error('Error:', error);
       });
+    setInputValue('');
+  }
 
+  const handleGetChatByCode = (e) => {
+    e.preventDefault();
+    console.log(inputValue);
+    axios.post('http://localhost:5002/getChatByCode', {
+      "chat_id": inputValue
+    })
+      .then(response => {
+        if (response.data.success) {
+          const chatName = response.data.chat_name
+          navigate(`/chat/${chatName}`)
+        } else {
+          console.log(response.data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
     setInputValue('');
   }
 
@@ -36,21 +68,36 @@ const Home = () => {
       <Navbar />
 
       <h1>Welcome to the Chat App!</h1>
-      <p>Please select a chatroom.</p>
 
-      <form onSubmit={handleCreateChat}>
-        <input type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-        <button type="submit">Submit</button>
-      </form>
+      {currentUser
+        ?
+        <>
+          <p>Would you like to create a chat or join a chat?</p>
+          <button onClick={() => setCreateOrJoin('create')}>Create</button>
+          <button onClick={() => setCreateOrJoin('join')}>Join</button>
+        </>
+        :
+        <>
+          <p>Register to create chats or use a private code to enter and existing chat</p>
+          <button onClick={() => navigate('/register')}>Register</button>
+          <button onClick={() => setCreateOrJoin('join')}>Join</button>
+        </>
+      }
+      
 
-
-<br></br>
-<br></br>
-<br></br>
-
-      <button onClick={() => navigate('/room/testRoom')}>testRoom</button>
-      <button onClick={() => navigate('/room/testRoom2')}>testRoom2</button>
-
+      {createOrJoin === 'create' && 
+        <form onSubmit={handleCreateChat}>
+          <input type="text" placeholder="create chat name" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+          <button type="submit">Create</button>
+        </form>
+      }
+      {createOrJoin === 'join' &&
+        <form onSubmit={handleGetChatByCode}>
+          <input type="text" placeholder="enter private code" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+          <button type="submit">Join</button>
+        </form>
+      }
+      
      
     </div>
   );

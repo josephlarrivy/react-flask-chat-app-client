@@ -1,0 +1,14 @@
+#navbar-container {
+    position: absolute;
+    width: 100%;
+    height: 6vh;
+    background-color: aqua;
+}
+
+#content-container {
+    margin-top: 6vh;
+    height: 94vh;
+    width: 100vw;
+    position: absolute;
+    /* background-color: beige; */
+}

@@ -16,7 +16,7 @@ function App() {
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
           <Route exact path="/register" element={<Register />} />
-          <Route path="/room/:roomName" element={ <ChatRoom />} />
+          <Route path="/chat/:chatName" element={ <ChatRoom />} />
           {/* <Route path="/room2" render={() => <ChatRoom roomName={'room2'} username={'user2'} />} /> */}
           {/* add more routes for additional chatrooms */}
         </Routes>
