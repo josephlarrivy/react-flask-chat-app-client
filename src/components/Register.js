@@ -14,7 +14,7 @@ const Register = () => {
 
   const handleRegister = () => {
     axios
-      .post('http://localhost:5002/register', {
+      .post('https://clearchat-server.herokuapp.com/register', {
         username: username,
         password: password,
         email: email,

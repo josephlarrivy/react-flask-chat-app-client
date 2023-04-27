@@ -23,7 +23,7 @@
 #chat-container {
     width: 50vw;
     padding: 10px;
-    /* background-color: #ff1053; */
+    /* background-color: #66C7F4; */
     height: 75vh;
 }
 
@@ -49,12 +49,11 @@
 }
 
 
-
-
 #right-container {
     width: 40vw;
     padding: 10px;
-    background-color: #ff1053;
+    border: 1px solid #66C7F4;
+    border-radius: 20px;
 }
 
 
@@ -64,7 +63,7 @@ button {
     font-size: large;
     font-weight: 700;
     color: white;
-    background-image: linear-gradient(to bottom right, white, #ff1053);
+    background-image: linear-gradient(to bottom right, white, #66C7F4);
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     margin-left: 20px;

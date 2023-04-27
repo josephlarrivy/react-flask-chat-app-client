@@ -19,15 +19,13 @@ const Home = () => {
     const user = localRetrieveUsername()
     if (user !== null) {
       setCurrentUser(user)
-    } else {
-      setCurrentUser(null)
     }
   }, [])
 
   const handleCreateChat = (e) => {
     e.preventDefault();
     console.log(inputValue);
-    axios.post('http://localhost:5002/createChat', {
+    axios.post('https://clearchat-server.herokuapp.com/createChat', {
       "chatname" : inputValue,
       "owner" : currentUser
     })
@@ -48,7 +46,7 @@ const Home = () => {
   const handleGetChatByCode = (e) => {
     e.preventDefault();
     console.log(inputValue);
-    axios.post('http://localhost:5002/getChatByCode', {
+    axios.post('https://clearchat-server.herokuapp.com/getChatByCode', {
       "chat_id": inputValue
     })
       .then(response => {
@@ -73,7 +71,7 @@ const Home = () => {
 
       <div id='content-container-home'>
 
-      <h1>Welcome to the Chat App!</h1>
+      <h1>Welcome to clearchat</h1>
 <br></br>
 <br></br>
 
@@ -102,7 +100,7 @@ const Home = () => {
         }
         {createOrJoin === 'join' &&
           <form onSubmit={handleGetChatByCode}>
-            <input className="form-input-home" type="text" placeholder="enter private code" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <input className="form-input-home" type="text" placeholder="enter code" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
             <br></br>
             <button type="submit-home">Join</button>
           </form>

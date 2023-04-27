@@ -15,7 +15,7 @@ const Login = () => {
 
 
   const handleLogin = () => {
-    axios.post('http://localhost:5002/login', {
+    axios.post('https://clearchat-server.herokuapp.com/login', {
       username: username,
       password: password
     })

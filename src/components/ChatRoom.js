@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 import './styles/ChatRoom.css'
 import Message from './Message';
 
-const socket = io.connect('http://localhost:5000');
+const socket = io.connect('https://clearchat-server.herokuapp.com');
 
 const ChatRoom = () => {
 
@@ -24,11 +24,15 @@ const ChatRoom = () => {
   const liveChatRef = useRef(null)
 
   useEffect(() => {
-    const storedUsername = localRetrieveUsername()
-    setUsername(storedUsername)
+    const user = localRetrieveUsername()
+    if (user !== null) {
+      setUsername(user)
+    } else {
+      setUsername("Guest User")
+    }
 
     const getChatCode = async () => {
-      axios.post('http://localhost:5002/getCodeByName', {
+      axios.post('https://clearchat-server.herokuapp.com/getCodeByName', {
         "chat_name": chatName
       })
         .then(response => {
@@ -68,8 +72,10 @@ const ChatRoom = () => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    socket.emit('message', { room: chatName, username, message: input });
-    setInput('');
+    if (input.length > 0) {
+      socket.emit('message', { room: chatName, username, message: input });
+      setInput('');
+    }
   };
 
   return (
@@ -83,7 +89,7 @@ const ChatRoom = () => {
           <div id='chat-container'>
             <div id='live-chat-area' ref={liveChatRef}>
               {messages.map((item, i) => (
-                <Message key={i} message={item.message} username={item.username}/>
+                <Message key={i} message={item.message} username={item.username} currentUser={username}/>
               ))}
             </div>
             <form className='input-form' onSubmit={handleSubmit}>
@@ -97,8 +103,15 @@ const ChatRoom = () => {
           </div>
 
           <div id='right-container'>
-            <h1>Joined <b>{chatName}</b> as <b>{username}</b></h1>
-            <p>{chatCode}</p>
+            <h4>You have joined: {chatName}</h4>
+            <p>username: <b>{username}</b></p>
+            <br></br>
+
+            <p>The code for this chat is:</p>
+            <p><b>{chatCode}</b></p>
+            <p> People that you wish to connect can use this code on the homepage to find this chat.</p>
+            <br></br>
+            <p>This is not an encrypted chat. However, be careful because once you leave or refresh your page there is no way to retreive your previous messages.</p>
           </div>
         </div>
       </div>
