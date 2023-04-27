@@ -7,6 +7,7 @@ const socket = io.connect('http://localhost:5000');
 const ChatRoom = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
+  const [typingMessage, setTypingMessage] = useState();
   const { roomName } = useParams();
 
   const username = 'test'
@@ -25,13 +26,19 @@ const ChatRoom = () => {
   }, [messages]);
 
   useEffect(() => {
-    console.log(roomName)
-  }, [])
+    socket.on('typing', message => {
+      console.log(message);
+    });
+  }, []);
 
   const handleSubmit = e => {
     e.preventDefault();
     socket.emit('message', { room: roomName, username, message: input });
     setInput('');
+  };
+
+  const handleTyping = () => {
+    socket.emit('typing', { room: roomName, username });
   };
 
   return (
@@ -42,8 +49,16 @@ const ChatRoom = () => {
           <li key={i}>{message}</li>
         ))}
       </ul>
+      {typingMessage
+        ? <p>typing</p>
+        : <></>
+      }
       <form onSubmit={handleSubmit}>
-        <input value={input} onChange={e => setInput(e.target.value)} />
+        <input
+          value={input}
+          onChange={e => setInput(e.target.value)}
+          onKeyPress={handleTyping}
+        />
         <button type="submit">Send</button>
       </form>
     </div>
