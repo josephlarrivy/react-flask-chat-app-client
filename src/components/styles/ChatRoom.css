@@ -14,34 +14,42 @@
 }
 
 #chat-display-container {
+    margin-top: 30px;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
 }
 
-.input-form {
-    width: 100%;
-    margin-top: 85%;
-    background-color: white;
+#chat-container {
+    width: 50vw;
+    padding: 10px;
+    /* background-color: #ff1053; */
+    height: 75vh;
 }
 
 #live-chat-area {
-    height: 10%;
+    height: 100%;
+    width: 100%;
+    /* background-color: blueviolet; */
     overflow-y: scroll;
 }
+
+.input-form {
+    width: 100%;
+    margin-top: 10px;
+    background-color: white;
+}
+
+
 
 .input-form input {
     width: 80%;
     height: 50px;
+    font-size: 20px;
 }
 
 
-#chat-container {
-    width: 40vw;
-    padding: 10px;
-    background-color: #ff1053;
-    height: 75vh;
-}
+
 
 #right-container {
     width: 40vw;

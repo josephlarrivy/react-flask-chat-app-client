@@ -1,0 +1,29 @@
+.single-message-container {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 1px;
+    width: 80%;
+    margin-bottom: 10px;
+}
+
+.single-message-message {
+    font-size: 1em;
+    margin-bottom: 5px;
+    margin-right: 30px;
+    text-align: right;
+}
+
+.single-message-username {
+    font-size: 0.8em;
+    /* font-weight: bold; */
+    /* margin-bottom: 2px; */
+    margin-right: 5px;
+    text-align: right;
+}
+
+.single-message-time {
+    font-size: 0.8em;
+    color: #777;
+    margin-right: 5px;
+    text-align: right;
+}

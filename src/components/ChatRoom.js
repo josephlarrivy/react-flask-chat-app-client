@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
 import io from 'socket.io-client';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -6,6 +6,7 @@ import useLocalStorage from "../hooks/useLocalStorage";
 import Navbar from './Navbar';
 
 import './styles/ChatRoom.css'
+import Message from './Message';
 
 const socket = io.connect('http://localhost:5000');
 
@@ -20,6 +21,7 @@ const ChatRoom = () => {
   const [chatCode, setChatCode] = useState(null)
   const { chatName } = useParams();
 
+  const liveChatRef = useRef(null)
 
   useEffect(() => {
     const storedUsername = localRetrieveUsername()
@@ -57,6 +59,11 @@ const ChatRoom = () => {
     socket.on('message', message => {
       setMessages([...messages, message]);
     });
+    console.log(messages)
+  }, [messages]);
+
+  useLayoutEffect(() => {
+    liveChatRef.current.scrollTop = liveChatRef.current.scrollHeight;
   }, [messages]);
 
   const handleSubmit = e => {
@@ -72,17 +79,13 @@ const ChatRoom = () => {
       </div>
 
       <div id='content-container-chatroom'>
-        <h1>Joined <b>{chatName}</b> as <b>{username}</b></h1>
-        <p>{chatCode}</p>
-
-
         <div id='chat-display-container'>
           <div id='chat-container'>
-            <span id='live-chat-area'>
-              {messages.map((message, i) => (
-                <p key={i}>{message}</p>
+            <div id='live-chat-area' ref={liveChatRef}>
+              {messages.map((item, i) => (
+                <Message key={i} message={item.message} username={item.username}/>
               ))}
-            </span>
+            </div>
             <form className='input-form' onSubmit={handleSubmit}>
               <input
                 type="text-area"
@@ -92,18 +95,16 @@ const ChatRoom = () => {
               <button type="submit">Send</button>
             </form>
           </div>
-          <div id='right-container'>
 
+          <div id='right-container'>
+            <h1>Joined <b>{chatName}</b> as <b>{username}</b></h1>
+            <p>{chatCode}</p>
           </div>
         </div>
-       
-
-
-
-
       </div>
     </div>
   );
 };
+
 
 export default ChatRoom;
