@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "./Login";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const Home = () => {
 
+  const [localStoreUsername, localRemoveUsername, localRetrieveUsername] = useLocalStorage()
   const navigate = useNavigate()
 
   return (

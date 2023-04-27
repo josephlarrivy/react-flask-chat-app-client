@@ -1,16 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
 import { useParams } from 'react-router-dom';
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const socket = io.connect('http://localhost:5000');
 
 const ChatRoom = () => {
+
+  const [localStoreUsername, localRemoveUsername, localRetrieveUsername] = useLocalStorage()
+
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState('');
   const [typingMessage, setTypingMessage] = useState();
+  const [username, setUsername] = useState('none')
   const { roomName } = useParams();
 
-  const username = 'test'
+  useEffect(() => {
+    const storedUsername = localRetrieveUsername()
+    setUsername(storedUsername)
+  }, []);
 
   useEffect(() => {
     socket.emit('join', { room: roomName, username });
@@ -25,39 +33,24 @@ const ChatRoom = () => {
     });
   }, [messages]);
 
-  useEffect(() => {
-    socket.on('typing', message => {
-      console.log(message);
-    });
-  }, []);
-
   const handleSubmit = e => {
     e.preventDefault();
     socket.emit('message', { room: roomName, username, message: input });
     setInput('');
   };
 
-  const handleTyping = () => {
-    socket.emit('typing', { room: roomName, username });
-  };
-
   return (
     <div>
-      <h1>Chat Room: {roomName}</h1>
+      <h1>Joined <b>{roomName}</b> as <b>{username}</b></h1>
       <ul>
         {messages.map((message, i) => (
           <li key={i}>{message}</li>
         ))}
       </ul>
-      {typingMessage
-        ? <p>typing</p>
-        : <></>
-      }
       <form onSubmit={handleSubmit}>
         <input
           value={input}
           onChange={e => setInput(e.target.value)}
-          onKeyPress={handleTyping}
         />
         <button type="submit">Send</button>
       </form>
