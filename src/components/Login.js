@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useLocalStorage from "../hooks/useLocalStorage";
 import Navbar from './Navbar';
 
+import './styles/Login.css'
 
 const Login = () => {
 
@@ -42,20 +43,41 @@ const Login = () => {
 
   return (
     <div>
-      <Navbar />
 
-      <h1>Login</h1>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={handleUsernameChange} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input type="password" value={password} onChange={handlePasswordChange} />
-      </label>
-      <br />
-      <button onClick={handleLogin}>Login</button>
+
+
+      <div id='navbar-container-login'>
+        <Navbar />
+      </div>
+
+
+
+
+      <div id='content-container-login'>
+        <h1>Login</h1>
+        <form className='form-container-login'>
+
+
+        <div className='form-input-login'>
+          <label className='form-label-login'>Username:</label>
+            <input className='form-text-login' type="text" value={username} onChange={handleUsernameChange} />
+        </div>
+
+
+
+        <div className='form-input-login'>
+          <label className='form-label-login'>Password:</label>
+          <input className='form-text-login' type="password" value={password} onChange={handlePasswordChange} />
+          
+        </div>
+
+          <button className='form-submit-login' onClick={handleLogin}>Login</button>
+        </form>
+      </div>
+
+
+
+      
     </div>
   );
 };

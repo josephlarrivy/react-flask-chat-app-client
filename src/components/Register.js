@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import useLocalStorage from '../hooks/useLocalStorage';
 import Navbar from './Navbar';
+import './styles/Register.css'
 
 const Register = () => {
   const [localStoreUsername, localRemoveUsername, localRetrieveUsername] = useLocalStorage();
@@ -45,21 +46,28 @@ const Register = () => {
 
   return (
     <div>
-      <Navbar />
-      <h1>Register</h1>
-      <label>
-        Username:
-        <input type="text" value={username} onChange={handleUsernameChange} />
-      </label>
-      <label>
-        Password:
-        <input type="password" value={password} onChange={handlePasswordChange} />
-      </label>
-      <label>
-        Email:
-        <input type="email" value={email} onChange={handleEmailChange} />
-      </label>
-      <button onClick={handleRegister}>Register</button>
+      <div id='navbar-container-register'>
+        <Navbar />
+      </div>
+
+      <div id='content-container-register'>
+        <h1>Register</h1>
+        <form className='form-container-register'>
+          <div className='form-input-register'>
+            <label className='form-label-register'>Username:</label>
+            <input className='form-text-register' type="text" value={username} onChange={handleUsernameChange} />
+          </div>
+          <div className='form-input-register'>
+            <label className='form-label-register'>Password:</label>
+            <input className='form-text-register' type="password" value={password} onChange={handlePasswordChange} />
+          </div>
+          <div className='form-input-register'>
+            <label className='form-label-register'>Email:</label>
+            <input className='form-text-register' type="email" value={email} onChange={handleEmailChange} />
+          </div>
+          <button className='form-submit-register' onClick={handleRegister}>Register</button>
+        </form>
+      </div>
     </div>
   );
 };

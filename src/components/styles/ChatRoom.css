@@ -1,14 +1,67 @@
-#navbar-container {
+#navbar-container-chatroom {
     position: absolute;
     width: 100%;
     height: 6vh;
-    background-color: aqua;
 }
 
-#content-container {
+#content-container-chatroom {
     margin-top: 6vh;
     height: 94vh;
     width: 100vw;
     position: absolute;
-    /* background-color: beige; */
+    background-color: white;
+    overflow: hidden;
+}
+
+#chat-display-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.input-form {
+    width: 100%;
+    margin-top: 85%;
+    background-color: white;
+}
+
+#live-chat-area {
+    height: 10%;
+    overflow-y: scroll;
+}
+
+.input-form input {
+    width: 80%;
+    height: 50px;
+}
+
+
+#chat-container {
+    width: 40vw;
+    padding: 10px;
+    background-color: #ff1053;
+    height: 75vh;
+}
+
+#right-container {
+    width: 40vw;
+    padding: 10px;
+    background-color: #ff1053;
+}
+
+
+button {
+    border: none;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: 700;
+    color: white;
+    background-image: linear-gradient(to bottom right, white, #ff1053);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-left: 20px;
+}
+
+button:hover {
+    cursor: pointer;
 }

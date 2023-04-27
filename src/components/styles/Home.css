@@ -1,0 +1,40 @@
+#navbar-container-home {
+    position: absolute;
+    width: 100%;
+    height: 6vh;
+}
+
+#content-container-home {
+    margin-top: 6vh;
+    height: 94vh;
+    width: 100vw;
+    position: absolute;
+    background-color: white;
+}
+
+
+.form-input-home {
+    width: 20vw;
+    height: 3vw;
+    /* margin-left: 40vw; */
+    margin-top: 50px;
+    font-size: larger;
+    text-align: center;
+}
+
+button {
+    border: none;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: 700;
+    color: white;
+    background-image: linear-gradient(to bottom right, white, #ff1053);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+button:hover {
+    cursor: pointer;
+}

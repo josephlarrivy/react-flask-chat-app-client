@@ -5,6 +5,8 @@ import axios from 'axios'
 import useLocalStorage from "../hooks/useLocalStorage";
 import Navbar from "./Navbar";
 
+import'./styles/Home.css'
+
 const Home = () => {
 
   const [localStoreUsername, localRemoveUsername, localRetrieveUsername] = useLocalStorage()
@@ -65,40 +67,47 @@ const Home = () => {
 
   return (
     <div>
-      <Navbar />
+      <div id='navbar-container-home'>
+        <Navbar />
+      </div>
+
+      <div id='content-container-home'>
 
       <h1>Welcome to the Chat App!</h1>
+<br></br>
+<br></br>
 
-      {currentUser
-        ?
-        <>
-          <p>Would you like to create a chat or join a chat?</p>
-          <button onClick={() => setCreateOrJoin('create')}>Create</button>
-          <button onClick={() => setCreateOrJoin('join')}>Join</button>
-        </>
-        :
-        <>
-          <p>Register to create chats or use a private code to enter and existing chat</p>
-          <button onClick={() => navigate('/register')}>Register</button>
-          <button onClick={() => setCreateOrJoin('join')}>Join</button>
-        </>
-      }
-      
+        {currentUser
+          ?
+          <>
+            <p>Would you like to create a chat or join a chat?</p>
+            <button onClick={() => setCreateOrJoin('create')}>Create</button>
+            <button onClick={() => setCreateOrJoin('join')}>Join</button>
+          </>
+          :
+          <>
+            <p>Register to create a chat or use a private code to enter and existing chat</p>
+            <button onClick={() => navigate('/register')}>Register</button>
+            <button onClick={() => setCreateOrJoin('join')}>Join</button>
+          </>
+        }
+        
 
-      {createOrJoin === 'create' && 
-        <form onSubmit={handleCreateChat}>
-          <input type="text" placeholder="create chat name" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-          <button type="submit">Create</button>
-        </form>
-      }
-      {createOrJoin === 'join' &&
-        <form onSubmit={handleGetChatByCode}>
-          <input type="text" placeholder="enter private code" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
-          <button type="submit">Join</button>
-        </form>
-      }
-      
-     
+        {createOrJoin === 'create' && 
+          <form onSubmit={handleCreateChat}>
+            <input className="form-input-home" type="text" placeholder="create chat name" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <br></br>
+            <button type="submit-home">Create</button>
+          </form>
+        }
+        {createOrJoin === 'join' &&
+          <form onSubmit={handleGetChatByCode}>
+            <input className="form-input-home" type="text" placeholder="enter private code" value={inputValue} onChange={(e) => setInputValue(e.target.value)} />
+            <br></br>
+            <button type="submit-home">Join</button>
+          </form>
+        }
+      </div>
     </div>
   );
 }

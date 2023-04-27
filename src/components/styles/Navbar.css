@@ -1,0 +1,25 @@
+#navbar-self-container {
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#navbar-self-container button {
+    width: 15%;
+    height: 80%;
+    margin: 20px;
+    border: none;
+    border-radius: 10px;
+    font-size: large;
+    font-weight: 700;
+    color: white;
+    background-image: linear-gradient(to bottom right, white, #ff1053);
+}
+
+#navbar-self-container button:hover {
+    cursor: pointer;
+}

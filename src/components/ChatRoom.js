@@ -67,25 +67,40 @@ const ChatRoom = () => {
 
   return (
     <div>
-      <div id='navbar-container'>
+      <div id='navbar-container-chatroom'>
         <Navbar />
       </div>
 
-      <div id='content-container'>
+      <div id='content-container-chatroom'>
         <h1>Joined <b>{chatName}</b> as <b>{username}</b></h1>
         <p>{chatCode}</p>
-        <ul>
-          {messages.map((message, i) => (
-            <li key={i}>{message}</li>
-          ))}
-        </ul>
-        <form onSubmit={handleSubmit}>
-          <input
-            value={input}
-            onChange={e => setInput(e.target.value)}
-          />
-          <button type="submit">Send</button>
-        </form>
+
+
+        <div id='chat-display-container'>
+          <div id='chat-container'>
+            <span id='live-chat-area'>
+              {messages.map((message, i) => (
+                <p key={i}>{message}</p>
+              ))}
+            </span>
+            <form className='input-form' onSubmit={handleSubmit}>
+              <input
+                type="text-area"
+                value={input}
+                onChange={e => setInput(e.target.value)}
+              />
+              <button type="submit">Send</button>
+            </form>
+          </div>
+          <div id='right-container'>
+
+          </div>
+        </div>
+       
+
+
+
+
       </div>
     </div>
   );
