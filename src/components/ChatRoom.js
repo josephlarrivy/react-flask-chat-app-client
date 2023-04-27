@@ -10,7 +10,6 @@ import socketIOClient from 'socket.io-client';
 import './styles/ChatRoom.css'
 import Message from './Message';
 
-const socket = socketIOClient.connect('https://clearchat-server.herokuapp.com');
 
 const ChatRoom = () => {
 
@@ -22,7 +21,8 @@ const ChatRoom = () => {
   const [username, setUsername] = useState('none')
   const [chatCode, setChatCode] = useState(null)
   const { chatName } = useParams();
-  const socket = io.connect('https://clearchat-server.herokuapp.com');
+  const socket = socketIOClient.connect('https://clearchat-server.herokuapp.com');
+
 
   const liveChatRef = useRef(null)
 
