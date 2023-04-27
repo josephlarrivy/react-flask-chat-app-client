@@ -14,6 +14,7 @@ const Home = () => {
   const [inputValue, setInputValue] = useState('');
   const [createOrJoin, setCreateOrJoin] = useState(null)
   const [currentUser, setCurrentUser] = useState(null)
+  const socket = io.connect('https://clearchat-server.herokuapp.com');
 
   useEffect(() => {
     const user = localRetrieveUsername()
