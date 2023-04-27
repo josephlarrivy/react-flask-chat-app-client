@@ -9,14 +9,14 @@ const Login = () => {
 
   const [localStoreUsername, localRemoveUsername, localRetrieveUsername] = useLocalStorage()
   const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate()
 
 
   const handleLogin = () => {
-    localStoreUsername(username)
     axios.post('http://localhost:5002/login', {
       username: username,
-      password: 'pass' // replace with the actual password input
+      password: password
     })
       .then(response => {
         if (response.data.success) {
@@ -35,6 +35,9 @@ const Login = () => {
     setUsername(event.target.value);
   }
 
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+  }
 
 
   return (
@@ -46,6 +49,12 @@ const Login = () => {
         Username:
         <input type="text" value={username} onChange={handleUsernameChange} />
       </label>
+      <br />
+      <label>
+        Password:
+        <input type="password" value={password} onChange={handlePasswordChange} />
+      </label>
+      <br />
       <button onClick={handleLogin}>Login</button>
     </div>
   );
