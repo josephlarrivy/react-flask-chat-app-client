@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import useLocalStorage from "../hooks/useLocalStorage";
 import Navbar from "./Navbar";
+import io from 'socket.io-client';
 
 import'./styles/Home.css'
 
@@ -14,6 +15,7 @@ const Home = () => {
   const [inputValue, setInputValue] = useState('');
   const [createOrJoin, setCreateOrJoin] = useState(null)
   const [currentUser, setCurrentUser] = useState(null)
+  const socket = io.connect('https://clearchat-server.herokuapp.com');
 
   useEffect(() => {
     const user = localRetrieveUsername()

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import useLocalStorage from "../hooks/useLocalStorage";
 import Navbar from './Navbar';
+import io from 'socket.io-client';
 
 import './styles/ChatRoom.css'
 import Message from './Message';
@@ -20,6 +21,7 @@ const ChatRoom = () => {
   const [username, setUsername] = useState('none')
   const [chatCode, setChatCode] = useState(null)
   const { chatName } = useParams();
+  const socket = io.connect('https://clearchat-server.herokuapp.com');
 
   const liveChatRef = useRef(null)
 
