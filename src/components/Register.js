@@ -11,7 +11,6 @@ const Register = () => {
   const [password, setPassword] = useState('');
   const [email, setEmail] = useState('');
   const navigate = useNavigate();
-  const socket = io.connect('https://clearchat-server.herokuapp.com');
 
   const handleRegister = () => {
     axios

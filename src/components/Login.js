@@ -12,7 +12,6 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate()
-  const socket = io.connect('https://clearchat-server.herokuapp.com');
 
 
   const handleLogin = () => {
