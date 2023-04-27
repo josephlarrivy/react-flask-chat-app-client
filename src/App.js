@@ -4,6 +4,7 @@ import ChatRoom from './components/ChatRoom';
 import Home from './components/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
+          <Route exact path="/register" element={<Register />} />
           <Route path="/room/:roomName" element={ <ChatRoom />} />
           {/* <Route path="/room2" render={() => <ChatRoom roomName={'room2'} username={'user2'} />} /> */}
           {/* add more routes for additional chatrooms */}

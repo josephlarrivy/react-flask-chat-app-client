@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Login from "./Login";
 import useLocalStorage from "../hooks/useLocalStorage";
+import Navbar from "./Navbar";
 
 const Home = () => {
 
@@ -10,9 +11,7 @@ const Home = () => {
 
   return (
     <div>
-      <button onClick={() => { navigate('/') }}>Home</button>
-      <button onClick={() => { navigate('/login') }}>Log In</button>
-      <button onClick={() => { localRemoveUsername() }}>Log Out</button>
+      <Navbar />
 
       <h1>Welcome to the Chat App!</h1>
       <p>Please select a chatroom.</p>

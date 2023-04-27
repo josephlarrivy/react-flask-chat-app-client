@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import useLocalStorage from "../hooks/useLocalStorage";
+import Navbar from './Navbar';
 
 const socket = io.connect('http://localhost:5000');
 
@@ -14,6 +15,7 @@ const ChatRoom = () => {
   const [typingMessage, setTypingMessage] = useState();
   const [username, setUsername] = useState('none')
   const { roomName } = useParams();
+  const navigate = useNavigate()
 
   useEffect(() => {
     const storedUsername = localRetrieveUsername()
@@ -41,6 +43,8 @@ const ChatRoom = () => {
 
   return (
     <div>
+      <Navbar />
+
       <h1>Joined <b>{roomName}</b> as <b>{username}</b></h1>
       <ul>
         {messages.map((message, i) => (
